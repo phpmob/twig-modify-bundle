@@ -82,7 +82,7 @@ A wrapped modifier for `\HTMLPurifier::purify`, Thanks [ezyang/htmlpurifier](htt
 ```
 
 ## Cache
-TwigModifyBundle use local cache folder by default, however you can use any cache that implemented `\Doctrine\Common\Cache\Cache` interface and then change the confiuration for your cache servie:
+TwigModifyBundle use local cache folder by default, however you can use any cache that implemented `\Doctrine\Common\Cache\Cache` interface and then change the confiuration for your cache service:
 
 ```yaml
 phpmob_twig_modify:
@@ -127,7 +127,7 @@ After that you already to use your new modifier.
  ```
 
 ## Configuration
-TwigModifyBundle use local cache folder by default, however you can use any cache that implemented `\Doctrine\Common\Cache\Cache` interface and then change the confiuration for your cache servie:
+Configuration reference:
 
 ```yaml
 phpmob_twig_modify:
