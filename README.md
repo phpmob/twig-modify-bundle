@@ -81,6 +81,14 @@ A wrapped modifier for `\HTMLPurifier::purify`, Thanks [ezyang/htmlpurifier](htt
 {% endmodify %}
 ```
 
+#### AntiXss
+A wrapped modifier for `\voku\helper\AntiXSS`, Thanks [voku/anti-xss](https://github.com/voku/anti-xss)
+```twig
+{% modify antixss %}
+    {{ harm_string|raw }}
+{% endmodify %}
+```
+
 ## Cache
 TwigModifyBundle use local cache folder by default, however you can use any cache that implemented `\Doctrine\Common\Cache\Cache` interface and then change the confiuration for your cache service:
 
@@ -150,6 +158,7 @@ phpmob_twig_modify:
     - https://github.com/ezyang/htmlpurifier
     - https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port
     - https://github.com/tedious/JShrink
+    - https://github.com/voku/anti-xss
 
 ## License
 

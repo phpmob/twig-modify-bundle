@@ -32,6 +32,12 @@
                         <argument key="Cache.SerializerPath">%kernel.cache_dir%/htmlpurifier</argument>
                     </argument>
                 </argument>
+                <argument key="antixss" type="collection">
+                    <argument key="class">\PhpMob\TwigModifyBundle\Modifier\AntiXss</argument>
+                    <argument key="method">modify</argument>
+                    <argument key="enabled">true</argument>
+                    <argument key="options" type="collection"/>
+                </argument>
             </argument>
         </service>
 
