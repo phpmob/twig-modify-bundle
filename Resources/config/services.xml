@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="phpmob_twig_modify.cache.local_file" class="PhpMob\TwigModifyBundle\Cache\LocalFile" public="false">
+            <argument>%kernel.cache_dir%/modify</argument>
+        </service>
+
+        <service id="phpmob_twig_modify.modifier" class="PhpMob\TwigModifyBundle\Modifier\Modify">
+            <argument/>
+            <argument type="collection">
+                <argument key="jsmin" type="collection">
+                    <argument key="class">\PhpMob\TwigModifyBundle\Modifier\JSMin</argument>
+                    <argument key="method">minify</argument>
+                    <argument key="enabled">true</argument>
+                    <argument key="options" type="collection"/>
+                </argument>
+                <argument key="cssmin" type="collection">
+                    <argument key="class">\PhpMob\TwigModifyBundle\Modifier\CSSMin</argument>
+                    <argument key="method">minify</argument>
+                    <argument key="enabled">true</argument>
+                    <argument key="options" type="collection"/>
+                </argument>
+                <argument key="htmlpurify" type="collection">
+                    <argument key="class">\PhpMob\TwigModifyBundle\Modifier\HTMLPurify</argument>
+                    <argument key="method">purify</argument>
+                    <argument key="enabled">true</argument>
+                    <argument key="options" type="collection">
+                        <argument key="Cache.SerializerPath">%kernel.cache_dir%/htmlpurifier</argument>
+                    </argument>
+                </argument>
+            </argument>
+        </service>
+
+        <service id="phpmob_twig_modify.twig.extension" class="PhpMob\TwigModifyBundle\Twig\Extension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="phpmob_twig_modify.modifier"/>
+            <argument>%phpmob_twig_modify.enabled%</argument>
+        </service>
+    </services>
+</container>
