@@ -11,7 +11,7 @@
 
 namespace PhpMob\TwigModifyBundle\Modifier;
 
-use voku\helper\AntiXSS;
+use voku\helper\AntiXSS as VokuAntiXss;
 
 /**
  * @author Ishmael Doss <nukboon@gmail.com>
@@ -26,7 +26,7 @@ class AntiXss
      */
     public static function modify($content, array $options = [])
     {
-        $antiXss = new AntiXSS();
+        $antiXss = new VokuAntiXss();
 
         return $antiXss->xss_clean($content);
     }
