@@ -32,7 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PhpMob\\TwigModifyBundle\\": "src/"
+            "PhpMob\\TwigModifyBundle\\": ""
         }
-    }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpMob\\TwigModifyBundle\\spec\\": "spec/"
+        }
+    },
 }
