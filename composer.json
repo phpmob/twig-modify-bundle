@@ -12,7 +12,7 @@
         "htmlpurify"
     ],
     "homepage": "http://github.com/phpmob/twig-modify-bundle",
-    "type": "library",
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
