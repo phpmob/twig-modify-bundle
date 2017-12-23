@@ -11,7 +11,7 @@
 
 namespace PhpMob\TwigModifyBundle\Modifier;
 
-use Doctrine\Common\Cache\Cache;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 /**
  * @author Ishmael Doss <nukboon@gmail.com>
@@ -26,10 +26,10 @@ class Modify
     static private $types = [];
 
     /**
-     * @param Cache $cache
+     * @param AdapterInterface $cache
      * @param array $types
      */
-    public function __construct(Cache $cache = null, array $types = [])
+    public function __construct(AdapterInterface $cache = null, array $types = [])
     {
         self::$cache = $cache;
         self::$types = $types;
@@ -46,9 +46,10 @@ class Modify
 
     /**
      * @param $content
-     * @param string $type
+     * @param $type
+     * @return mixed
      *
-     * @return string
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public static function modify($content, $type)
     {
@@ -64,8 +65,8 @@ class Modify
 
         $cacheId = md5($content);
 
-        if (self::$cache && self::$cache->contains($cacheId)) {
-            return self::$cache->fetch($cacheId);
+        if (self::$cache && self::$cache->hasItem($cacheId)) {
+            return self::$cache->getItem($cacheId)->get();
         }
 
         $content = call_user_func_array(
@@ -73,7 +74,7 @@ class Modify
             [$content, $modifier['options']]
         );
 
-        self::$cache && self::$cache->save($cacheId, $content);
+        self::$cache && self::$cache->save(self::$cache->getItem($cacheId)->set($content));
 
         return $content;
     }

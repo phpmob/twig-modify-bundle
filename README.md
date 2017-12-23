@@ -10,7 +10,7 @@ recommended.
 
 ```yaml
 "require": {
-  "phpmob/twig-modify-bundle": "~1.0"
+  "phpmob/twig-modify-bundle": "~2.0"
 }
 ```
 
@@ -90,23 +90,17 @@ A wrapped modifier for `\voku\helper\AntiXSS`, Thanks [voku/anti-xss](https://gi
 ```
 
 ## Cache
-TwigModifyBundle use local cache folder by default, however you can use any cache that implemented `\Doctrine\Common\Cache\Cache` interface and then change the confiuration for your cache service:
+TwigModifyBundle use local cache folder by default, however you can use any cache that implemented `\Symfony\Component\Cache\Adapter\AdapterInterface` interface and then change the confiuration for your cache service:
 
 ```yaml
 phpmob_twig_modify:
-    cache: "my_cache_service_id"
+    cache_adapter: "my_cache_adapter_service_id"
 ```
 
-You can also use doctrine cache.
+You can also use symfony [framework-bundle cache adapter](https://symfony.com/doc/current/reference/configuration/framework.html#reference-templating-cache).
 ```yaml
-
-doctrine_cache:
-    providers:
-        modifier_cache:
-            type: file_system
-
 phpmob_twig_modify:
-    cache: "doctrine_cache.providers.modifier_cache"
+    cache_adapter: "cache.app"
 ```
 
 Don't fogot enable `DoctrineCacheBundle` in your `AppKernel.php` - See https://symfony.com/doc/current/bundles/DoctrineCacheBundle/index.html
@@ -139,8 +133,8 @@ Configuration reference:
 
 ```yaml
 phpmob_twig_modify:
-    # cache serivce implemented `\Doctrine\Common\Cache\Cache` interface.
-    cache: "my_cache_service_id"
+    # cache adapter serivce implemented `\Symfony\Component\Cache\Adapter\AdapterInterface` interface.
+    cache_adapter: "my_cache_service_id"
     # application wide toggle enable/disable all modifiers
     enabled: true
     # custom/override modifiers (same key of modifier will override other previous defined)

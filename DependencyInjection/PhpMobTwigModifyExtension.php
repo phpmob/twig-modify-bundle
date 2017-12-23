@@ -43,8 +43,10 @@ class PhpMobTwigModifyExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $definition = $container->getDefinition('phpmob_twig_modify.modifier');
-        $definition->replaceArgument(0, new Reference($config['cache'] ?: 'phpmob_twig_modify.cache.local_file'));
+        if ($config['cache_adapter']) {
+            $definition = $container->getDefinition('phpmob_twig_modify.modifier');
+            $definition->replaceArgument(0, new Reference($config['cache_adapter']));
+        }
 
         foreach ($config['modifiers'] as $key => $options) {
             $definition->addMethodCall('addType', [$key, $options]);

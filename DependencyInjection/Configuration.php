@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('enabled')->defaultValue(true)->end()
-                ->scalarNode('cache')->defaultValue(null)->end()
+                ->scalarNode('cache_adapter')->defaultValue(null)->end()
             ->end()
             ->children()
                 ->arrayNode('modifiers')
